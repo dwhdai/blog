@@ -1,7 +1,7 @@
-name: "blog"
-title: "My Blog"
+name: "David's Blog"
+title: "David's Blog"
 description: |
-  My Blog
+  My personal blog about data science and other topics
 output_dir: "docs"
 navbar:
   right:
