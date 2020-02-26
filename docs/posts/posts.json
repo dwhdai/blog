@@ -1,22 +1,5 @@
 [
   {
-    "path": "posts/ed_rn_assignment/",
-    "title": "Optimizing ED Nurse Assignment",
-    "description": "Short description of blog",
-    "author": [
-      {
-        "name": "David Dai and Neal Kaw",
-        "url": {}
-      }
-    ],
-    "date": "2019-06-15",
-    "categories": [
-      "R"
-    ],
-    "preview": {},
-    "last_modified": "2020-02-25T20:23:12-05:00"
-  },
-  {
     "path": "posts/2020-02-25-optimizing-ed-nurse-assignment/",
     "title": "Optimizing ED Nurse Assignment",
     "description": "Short description of blog",
@@ -31,6 +14,6 @@
       "R"
     ],
     "preview": {},
-    "last_modified": "2020-02-25T20:23:49-05:00"
+    "last_modified": "2020-02-25T20:33:19-05:00"
   }
 ]
