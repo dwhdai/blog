@@ -1,0 +1,55 @@
+---
+title: "Modeling domain-specific constraints with xgboost"
+description: |
+  Incorporating domain knowledge from subject matter experts is critical for building useful models. As statistician George Box said, *"All models are wrong, but some are useful."* How useful our models are depend critically on how well we apply domain knowledge to extract the signal from the noise.
+author:
+  - name: David Dai
+    url: https://www.daviddai.ca/
+    affiliation: Data Science & Advanced Analytics, Unity Health Toronto
+    affiliation_url: https://www.chartdatascience.ca/david-dai
+date: "`r Sys.Date()`"
+output:
+  distill::distill_article:
+    self_contained: false
+draft: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE,
+                      warning = F,
+                      message = F)
+```
+
+# Current State
+
+Recent methodological advances in conjunction with the wealth of available data has raised questions about the importance of subject matter experts and their domain expertise when it comes to building prediction models. The popularity of feature engineering, once considered of extreme critical importance in building the most performant prediction models, has taken a back-seat to give way to models like deep learning that put less emphasis on explicit user-defined features.
+
+While this may be a viable strategy in certain use-cases (eg. big-tech companies that have a lot of data, intentionally collected for specific purposes, and can validate results prospectively using experimentation), the current state and foreseeable future of prediction modeling in healthcare and clinical medicine requires a more collaborative approach between the domain experts (doctors, nurses, clinical managers, hospital executives) and data analysts.
+
+# 
+
+
+
+
+# Misc
+
+<blockquote>Given the rough
+medical truism that serious diseases are less common than mild diseases, it is even likely that
+underperformance in minority subsets could lead to disproportionate harm to patients. - Oakden-Rayner et al., NeurIPS 2019</blockquote>
+
+With increased capabilities of modern day algorithms to extract signal from noisy data, as well as increased awareness of said algorithms, it is paramount that we not forget the purpose and art of model-building: to create a mathematical representation of *real life*. 
+
+
+# A Simulated Experiment
+
+
+```{r}
+
+```
+
+
+
+# Conclusion
+
+
+In reality, data analysis aims to elucidate the data generating mechanism, and in a world where the data are vast and noise is abundant, the understanding of subject domain and its quirks is crucial for creating a data analysis with utility. 
