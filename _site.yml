@@ -1,14 +1,15 @@
-name: "David's Blog"
-title: "Improbable expectations"
+name: "improbable-expectations"
+title: "Blog Posts"
 description: |
   My personal blog about a statistician masquerading as a full-stack data scientist
 output_dir: "docs"
 navbar:
+  title: "Improbable Expectations - David's Blog"
   right:
     - text: "Home"
       href: index.html
-    - text: "About"
-      href: about.html
+    - text: "About Me"
+      href: https://www.daviddai.ca/about/
 output: distill::distill_article
 base_url: https://blog.daviddai.ca/
 collections:
