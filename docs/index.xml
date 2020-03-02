@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:dc="http://purl.org/dc/elements/1.1/" version="2.0">
+  <channel>
+    <title>Improbable expectations</title>
+    <link>https://blog.daviddai.ca/</link>
+    <atom:link href="https://blog.daviddai.ca/index.xml" rel="self" type="application/rss+xml"/>
+    <description>My personal blog about a statistician masquerading as a full-stack data scientist
+</description>
+    <generator>Distill</generator>
+    <lastBuildDate>Sun, 01 Mar 2020 00:00:00 +0000</lastBuildDate>
+    <item>
+      <title>Modeling domain-specific constraints with xgboost</title>
+      <dc:creator>David Dai</dc:creator>
+      <link>https://blog.daviddai.ca/posts/2020-03-01-modeling-domain-specific-constraints-with-xgboost</link>
+      <description>Incorporating domain knowledge from subject matter experts is critical for building useful models. As statistician George Box said, *"All models are wrong, but some are useful."* How useful our models are depend critically on how well we apply domain knowledge to extract the signal from the noise.</description>
+      <guid>https://blog.daviddai.ca/posts/2020-03-01-modeling-domain-specific-constraints-with-xgboost</guid>
+      <pubDate>Sun, 01 Mar 2020 00:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>Optimizing ED Nurse Assignment</title>
+      <dc:creator>David Dai and Neal Kaw</dc:creator>
+      <link>https://blog.daviddai.ca/posts/2020-02-25-optimizing-ed-nurse-assignment</link>
+      <description>Implementing an optimization tool for ED nurse assignment.</description>
+      <guid>https://blog.daviddai.ca/posts/2020-02-25-optimizing-ed-nurse-assignment</guid>
+      <pubDate>Sat, 15 Jun 2019 00:00:00 +0000</pubDate>
+    </item>
+  </channel>
+</rss>
