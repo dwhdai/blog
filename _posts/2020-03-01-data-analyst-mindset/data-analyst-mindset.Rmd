@@ -38,6 +38,8 @@ The influx of big-tech and other prominent players into medicine and the healthc
 
 <blockquote class="twitter-tweet tw-align-center"><p lang="en" dir="ltr">The Google AI mammogram paper is FLAWED.<br><br>Want to learn why?<br><br>AND why cancer screening is the LAST thing you should pick FIRST to work on with AI?<br><br>Read this <a href="https://twitter.com/hashtag/TWEETORIAL?src=hash&amp;ref_src=twsrc%5Etfw">#TWEETORIAL</a><br>This is educational, I promise <a href="https://t.co/W63Mr0N53l">pic.twitter.com/W63Mr0N53l</a></p>&mdash; Vinay Prasad (@VPrasadMDMPH) <a href="https://twitter.com/VPrasadMDMPH/status/1212840987363442689?ref_src=twsrc%5Etfw">January 2, 2020</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
-While neither of these examples directly imply immediate clinical utility, these illustrate the fact that without domain expertise from subject matter experts, we may simply be applying ML on medical datasets, rather than applying ML for the betterment of health.
+While neither of these examples directly imply immediate clinical utility, these illustrate the fact that without subject matter expertise and critical inspection of the data and our assumptions, we may simply be applying ML on medical datasets, rather than applying ML for the betterment of health.
 
-# "Hippocratic Oath" for Data Analysis
+# First, do no harm
+
+As the use of data becomes more pervasive and the technological systems supporting our way of life grow in complexity, the impact of even seemingly simple data analyses can be far-reaching. As Hilary Parker and Roger Peng suggested in their podcast, [Not So Standard Deviations](http://nssdeviations.com/), the notion of a "hippocratic oath" for data analysts may not seem so far-fetched in the current technological climate, especially in the field of healthcare where lives are at stake. While no such regulation exists currently, it is important to remember that behind the numbers are people's lives.
