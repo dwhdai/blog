@@ -13,7 +13,7 @@ output:
 tags:
 - Shiny
 - healthcare
-categories: R
+categories: R, Shiny, Healthcare, Implementation
 ---
 
 ```{r setup, include=FALSE}
