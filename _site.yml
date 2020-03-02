@@ -15,3 +15,4 @@ collections:
   posts:
     disqus: efficiently-biased-thoughts
     share: [twitter, linkedin]
+    citations: false
