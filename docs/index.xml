@@ -10,7 +10,8 @@
     <lastBuildDate>Sat, 15 Jun 2019 00:00:00 +0000</lastBuildDate>
     <item>
       <title>Optimizing ED Nurse Assignment</title>
-      <dc:creator>David Dai and Neal Kaw</dc:creator>
+      <dc:creator>David Dai</dc:creator>
+      <dc:creator>Neal Kaw</dc:creator>
       <link>https://blog.daviddai.ca/posts/2020-02-25-optimizing-ed-nurse-assignment</link>
       <description>Implementing an optimization tool for ED nurse assignment.</description>
       <guid>https://blog.daviddai.ca/posts/2020-02-25-optimizing-ed-nurse-assignment</guid>
