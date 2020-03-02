@@ -1,0 +1,43 @@
+---
+title: 'The Perils of "Auto-pilot Data Analysis"'
+description: |  
+  Incorporating domain knowledge from subject matter experts is critical for building useful models. As statistician George Box said, *"All models are wrong, but some are useful."* How useful our models are depend on how well we apply domain knowledge to extract the signal from the noise.
+author:
+  - name: David Dai
+    url: https://www.daviddai.ca/
+    affiliation: Data Science & Advanced Analytics, Unity Health Toronto
+    affiliation_url: https://www.chartdatascience.ca/david-dai
+date: "`r Sys.Date()`"
+output:
+  distill::distill_article:
+    self_contained: false
+draft: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+# The *Data Analyst* Mindset
+
+A feature common to many data analysts (myself included) is that we have an inherent trust in the data and with it, our ability to extract useful signal from the noise. We are naturally skeptical of domain expert opinions; this is understandable, given the [many forms of cognitive biases](https://en.wikipedia.org/wiki/List_of_cognitive_biases) that humans are susceptible to, and is likely what drew us to the practice of data analysis, acting as "speakers for the data". 
+
+<blockquote> "Sure, clinical expertise is helpful, but it must be riddled with subjectivity and circumstance. On the other hand, the data is objective and provides unbiased quantitative evidence." - My Subconscious Brain</blockquote>
+
+The above thought has probably crept up in many data analysts' mind. On a surface level, many of the same data analysts would probably agree that this way of thinking is flawed and incomplete. However, I would wager that a much smaller proportion of data analysts actively consider the consequences of "auto-pilot data analysis". The thought of pursuing the essence of *what makes a data analysis **good*** is difficult and rather abstract, making us vulnerable to the very things that we try to stay away from: subjectivity and circumstance. This is a mental hurdle that must be crossed if we are to create analyses with practical utility.
+
+# ML on medical datasets vs. ML *for* health
+
+With the increasing hype of data science and various avenues of exercising modeling prowess (eg. [Kaggle](https://kaggle.com)), model building has become a sport of sorts. In turn, the current culture of predictive model building encourages analysts to devote a disproportionate amount of effort on improving an arbitrary performance metric rather than improving their understanding of the model's objective, and how their model translates to practical, real-life utility. 
+
+Within medicine and healthcare applications, this approach to data analysis has serious consequences. Medical datasets are expensive to gather and label, and while the implications of creating scalable algorithmic approaches to medical diagnostics may be game-changing, the lack of domain knowledge and understanding of the data can lead to misleading results that lack clinical utility. Sometimes, it may even lead to asking the wrong questions, as was the case below.
+
+<blockquote class="twitter-tweet tw-align-center"><p lang="en" dir="ltr">Seems troubling: Many of the images in the CXR-14 chest x-ray data set are post treatment and have chest drains in the images. Once these examples are removed, machine learning performs worse than a first year resident. h/t <a href="https://twitter.com/DrLukeOR?ref_src=twsrc%5Etfw">@DrLukeOR</a> <a href="https://t.co/531VtwsRyx">https://t.co/531VtwsRyx</a></p>&mdash; Ben Recht (@beenwrekt) <a href="https://twitter.com/beenwrekt/status/1183745028696395776?ref_src=twsrc%5Etfw">October 14, 2019</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+The influx of big-tech and other prominent players into medicine and the healthcare sector has created excitement, but also stirred some controversy. In a similar vein to the previous example, this following example illustrates that building machine learning systems for health requires more than a well-performing model, but also a thorough understanding of the risks and consequences of such systems in deployment, such as overdiagnosis. 
+
+<blockquote class="twitter-tweet tw-align-center"><p lang="en" dir="ltr">The Google AI mammogram paper is FLAWED.<br><br>Want to learn why?<br><br>AND why cancer screening is the LAST thing you should pick FIRST to work on with AI?<br><br>Read this <a href="https://twitter.com/hashtag/TWEETORIAL?src=hash&amp;ref_src=twsrc%5Etfw">#TWEETORIAL</a><br>This is educational, I promise <a href="https://t.co/W63Mr0N53l">pic.twitter.com/W63Mr0N53l</a></p>&mdash; Vinay Prasad (@VPrasadMDMPH) <a href="https://twitter.com/VPrasadMDMPH/status/1212840987363442689?ref_src=twsrc%5Etfw">January 2, 2020</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+While neither of these examples directly imply immediate clinical utility, these illustrate the fact that without domain expertise from subject matter experts, we may simply be applying ML on medical datasets, rather than applying ML for the betterment of health.
+
+# "Hippocratic Oath" for Data Analysis
