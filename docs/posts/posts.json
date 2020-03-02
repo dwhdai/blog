@@ -1,20 +1,5 @@
 [
   {
-    "path": "posts/2020-03-01-modeling-domain-specific-constraints-with-xgboost/",
-    "title": "Modeling domain-specific constraints with xgboost",
-    "description": "Incorporating domain knowledge from subject matter experts is critical for building useful models. As statistician George Box said, *\"All models are wrong, but some are useful.\"* How useful our models are depend critically on how well we apply domain knowledge to extract the signal from the noise.",
-    "author": [
-      {
-        "name": "David Dai",
-        "url": "https://www.daviddai.ca/"
-      }
-    ],
-    "date": "2020-03-01",
-    "categories": [],
-    "preview": {},
-    "last_modified": "2020-03-01T20:18:10-05:00"
-  },
-  {
     "path": "posts/2020-02-25-optimizing-ed-nurse-assignment/",
     "title": "Optimizing ED Nurse Assignment",
     "description": "Implementing an optimization tool for ED nurse assignment.",
@@ -29,6 +14,6 @@
       "R"
     ],
     "preview": {},
-    "last_modified": "2020-03-01T23:33:17-05:00"
+    "last_modified": "2020-03-01T23:46:33-05:00"
   }
 ]
