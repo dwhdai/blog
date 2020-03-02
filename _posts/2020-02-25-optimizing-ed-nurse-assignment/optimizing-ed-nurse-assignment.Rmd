@@ -10,10 +10,11 @@ date: '2019-06-15'
 output:
   distill::distill_article:
     self_contained: false
-tags:
-- Shiny
-- healthcare
-categories: R, Shiny, Healthcare, Implementation
+categories: 
+  - R
+  - Shiny
+  - Healthcare
+  - Implementation
 ---
 
 ```{r setup, include=FALSE}
