@@ -2,7 +2,7 @@
   {
     "path": "posts/2020-02-25-optimizing-ed-nurse-assignment/",
     "title": "Optimizing ED Nurse Assignment",
-    "description": "Short description of blog",
+    "description": "Implementing an optimization tool for ED nurse assignment.",
     "author": [
       {
         "name": "David Dai and Neal Kaw",
@@ -14,6 +14,6 @@
       "R"
     ],
     "preview": {},
-    "last_modified": "2020-02-25T20:48:07-05:00"
+    "last_modified": "2020-03-01T23:33:17-05:00"
   }
 ]

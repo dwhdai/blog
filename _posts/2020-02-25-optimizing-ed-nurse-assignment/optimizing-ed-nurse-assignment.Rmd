@@ -1,7 +1,7 @@
 ---
 title: "Optimizing ED Nurse Assignment"
 description: |
-  Short description of blog
+  Implementing an optimization tool for ED nurse assignment.
 author:
   - name: David Dai and Neal Kaw
     affiliation: Data Science & Advanced Analytics, St. Michael's Hospital
