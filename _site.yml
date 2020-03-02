@@ -1,7 +1,7 @@
-name: "David's Blog"
+name: "Efficiently biased thoughts"
 title: "David's Blog"
 description: |
-  My personal blog about data science and other topics
+  My personal blog about a statistician masquerading as a full-stack data scientist
 output_dir: "docs"
 navbar:
   right:
@@ -11,3 +11,7 @@ navbar:
       href: about.html
 output: distill::distill_article
 base_url: https://blog.daviddai.ca/
+collections:
+  posts:
+    disqus: efficiently-biased-thoughts
+    share: [twitter, linkedin]
