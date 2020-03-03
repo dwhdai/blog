@@ -1,7 +1,7 @@
 ---
 title: "Modeling domain-specific constraints with xgboost"
 description: |
-Incorporating domain knowledge from subject matter experts is critical for building useful models. As statistician George Box said, *"All models are wrong, but some are useful."* How useful our models are depend critically on how well we apply domain knowledge to extract the signal from the noise.
+  Incorporating domain knowledge from subject matter experts is critical for building useful models. As statistician George Box said, *"All models are wrong, but some are useful."* How useful our models are depend critically on how well we apply domain knowledge to extract the signal from the noise.
 author:
   - name: David Dai
     url: https://www.daviddai.ca/
@@ -17,7 +17,8 @@ draft: true
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE,
                       warning = F,
-                      message = F)
+                      message = F,
+                      fig.keep = "all")
 ```
 
 # Current State
@@ -40,12 +41,20 @@ underperformance in minority subsets could lead to disproportionate harm to pati
 With increased capabilities of modern day algorithms to extract signal from noisy data, as well as increased awareness of said algorithms, it is paramount that we not forget the purpose and art of model-building: to create a mathematical representation of *real life*. 
 
 
+
+
 # A Simulated Experiment
 
-
 ```{r}
-# Simulate some data
 library(tidyverse)
+library(xgboost)
+library(ggplot2)
+```
+
+
+```{r cache = T}
+# Simulate some data
+
 set.seed(112892)
 
 n <- 50000
@@ -54,7 +63,11 @@ gender <- rbinom(n = n, size = 1, prob = 0.5)
 lvef_50 <- rbinom(n = n, size = 1, prob = 0.5)
 warfarin <- rpois(lambda = 28, n = n)/4
 
-inr <- 1 + 0.3*gender + 0*lvef_50 + 0.25*warfarin + 0.2*lvef_50*warfarin + 0.5*gender*lvef_50*warfarin + rnorm(mean = 0.25, n)
+# inr <- 1 + 0.3*gender + 0*lvef_50 + 0.25*warfarin + 0.5*lvef_50*warfarin +
+#   0.5*gender*warfarin  + rnorm(mean = 0.25, n)
+
+inr <- 1 + 0.3*gender + 0*lvef_50 + 0.25*warfarin + 0.2*lvef_50*warfarin + 1.5*gender*lvef_50*warfarin + rnorm(mean = 0.25, n)
+
 
 df <- tibble(
   gender = gender,
@@ -62,7 +75,7 @@ df <- tibble(
   warfarin = warfarin,
   inr = inr
 ) %>% 
-  # Create sampling weight for 
+  # Create sampling weight for artificial sample bias
   mutate(sampling_weight = case_when(
     gender == 1 & lvef_50 == 1 & warfarin > 9 ~ 0.01,
     gender == 0 & lvef_50 == 1 & warfarin > 9~ 0.01,
@@ -71,54 +84,160 @@ df <- tibble(
     TRUE ~ 1
   ))
 
-
+# Create a biased dataset with the sample size
 set.seed(12)
 bias_df <- df %>% 
   sample_frac(1,
               replace = TRUE,
-              weight = sampling_weight) %>% 
-  select(-sampling_weight, -lvef_50)
-ggplot(data = bias_df %>% 
-         slice(train_ind:valid_ind),
-       aes(x = warfarin,
-           y = inr)) + 
-  stat_smooth() +
-  geom_point() +
-  facet_grid(gender ~ lvef_50)
-
-
+              weight = sampling_weight) 
 
 ```
 
-```{r fit model}
-library(xgboost)
+```{r plot of original data}
+theme_set(theme_bw() + 
+            theme(strip.text = element_text(size = 14),
+                  axis.title = element_text(size = 14),
+                  panel.grid.minor = element_blank()))
 
+df %>% 
+  mutate(
+    gender = case_when(
+      gender == 0 ~ "Male",
+      gender == 1 ~ "Female"
+    ),
+    lvef_50 = case_when(
+      lvef_50 == 0 ~ "LVEF >50%",
+      lvef_50 == 1 ~ "LVEF <=50%"
+    )) %>% 
+  ggplot(aes(x = warfarin,
+             y = inr)) +
+  stat_smooth() +
+  geom_point() +
+  labs(y = "Blood Thinness Index (INR)",
+       x = "Blood Thinner Dosage (Warfarin, mg)")
+
+df %>% 
+  mutate(
+    gender = case_when(
+      gender == 0 ~ "Male",
+      gender == 1 ~ "Female"
+    ),
+    lvef_50 = case_when(
+      lvef_50 == 0 ~ "LVEF >50%",
+      lvef_50 == 1 ~ "LVEF <=50%"
+    )) %>% 
+  ggplot(aes(x = warfarin,
+             y = inr)) +
+  stat_smooth() +
+  geom_point() +
+  facet_grid(gender ~ lvef_50) +
+  labs(y = "Blood Thinness Index (INR)",
+       x = "Blood Thinner Dosage (Warfarin, mg)")
+
+```
+
+```{r}
+bias_df %>% 
+  mutate(
+    gender = case_when(
+      gender == 0 ~ "Male",
+      gender == 1 ~ "Female"
+    ),
+    lvef_50 = case_when(
+      lvef_50 == 0 ~ "LVEF >50%",
+      lvef_50 == 1 ~ "LVEF <=50%"
+    )) %>% 
+  ggplot(aes(x = warfarin,
+             y = inr)) +
+  stat_smooth() +
+  geom_point(alpha = 0.05) +
+  labs(y = "Blood Thinness Index (INR)",
+       x = "Blood Thinner Dosage (Warfarin, mg)")
+
+bias_df %>% 
+  mutate(
+    gender = case_when(
+      gender == 0 ~ "Male",
+      gender == 1 ~ "Female"
+    ),
+    lvef_50 = case_when(
+      lvef_50 == 0 ~ "LVEF >50%",
+      lvef_50 == 1 ~ "LVEF <=50%"
+    )) %>% 
+  ggplot(aes(x = warfarin,
+             y = inr)) +
+  stat_smooth() +
+  geom_point(alpha = 0.05) +
+  facet_grid(gender ~ lvef_50) +
+  labs(y = "Blood Thinness Index (INR)",
+       x = "Blood Thinner Dosage (Warfarin, mg)")
+```
+
+
+```{r fit model, cache = T}
+# Calculate row index for data splits
 train_ind <- 0.7*n
 valid_ind <- 0.85*n
 
-train <- bias_df %>% 
-  slice(1:train_ind)
+# Original training data
+train <- df %>%
+  dplyr::slice(1:train_ind)
 
-valid <- bias_df %>%
-  slice((train_ind + 1):valid_ind)
+valid <- df %>%
+  dplyr::slice((train_ind + 1):valid_ind)
 
+# Biased training data
+train_bias <- bias_df %>% 
+  dplyr::slice(1:train_ind)
+
+valid_bias <- bias_df %>%
+  dplyr::slice((train_ind + 1):valid_ind)
+
+# Original test set
 test <- df %>% 
-  select(-lvef_50, -sampling_weight) %>% 
-  slice((valid_ind + 1):n)
+  dplyr::slice((valid_ind + 1):n)
 
+# Create xgboost matrices
 train_mat <- xgb.DMatrix(train %>% 
-                           select(-inr) %>% 
+                           select(-inr,
+                                  -lvef_50,
+                                  -sampling_weight) %>% 
                            as.matrix(), 
                          label = train$inr)
+
+train_mat_bias <- xgb.DMatrix(train_bias %>% 
+                                select(-inr,
+                                       -lvef_50,
+                                       -sampling_weight) %>% 
+                                as.matrix(), 
+                              label = train$inr)
+
 valid_mat <- xgb.DMatrix(valid %>% 
-                           select(-inr) %>% 
+                           select(-inr,
+                                  -lvef_50,
+                                  -sampling_weight) %>% 
                            as.matrix(), 
                          label = valid$inr)
+
+valid_mat_bias <- xgb.DMatrix(valid_bias %>% 
+                                select(-inr,
+                                       -lvef_50,
+                                       -sampling_weight) %>% 
+                                as.matrix(), 
+                              label = valid$inr)
+
 test_mat <- xgb.DMatrix(test %>% 
-                          select(-inr) %>% 
+                          select(-inr,
+                                 -lvef_50,
+                                 -sampling_weight) %>% 
                           as.matrix(), 
                         label = test$inr)
 
+```
+
+
+```{r model with original dataset, cache = T}
+# Train model with original dataset
 watchlist <- list(train = train_mat,
                   eval = valid_mat)
 
@@ -128,54 +247,106 @@ params <- list(max_depth = 3,
                eval_metric = "rmse",
                objective = "reg:squarederror")
 
-xgb_fit <- xgb.train(data = train_mat,
+xgb_fit_original <- xgb.train(data = train_mat, 
+                              params = params,
+                              nrounds = 1000,
+                              verbose = F,
+                              early_stopping_rounds = 50,
+                              watchlist = watchlist)
+
+# Generate predictions
+pred_original <- predict(xgb_fit_original, test_mat)
+
+shap_vals_original <- predict(xgb_fit_original, 
+                              test_mat,
+                              predcontrib = T) %>% 
+  as_tibble() %>% 
+  rename(gender_shap = gender,
+         warfarin_shap = warfarin,
+         bias_shap = BIAS) %>% 
+  bind_cols(test) %>% 
+  bind_cols(pred = pred_original) %>% 
+  mutate(experiment = "Original")
+
+
+```
+
+
+
+```{r model with biased dataset, cache = T}
+# Train model with biased dataset
+watchlist_bias <- list(train = train_mat_bias,
+                       eval = valid_mat_bias)
+
+params <- list(max_depth = 3,
+               eta = 0.03, 
+               nthread = 4,
+               eval_metric = "rmse",
+               objective = "reg:squarederror")
+
+xgb_fit <- xgb.train(data = train_mat_bias, 
                      params = params,
-                     verbose = T,
                      nrounds = 1000,
+                     verbose = F,
                      early_stopping_rounds = 50,
                      watchlist = watchlist)
 
-xgb_fit_monotonic <- xgb.train(data = train_mat,
+xgb_fit_monotonic <- xgb.train(data = train_mat_bias,
                                params = params,
                                monotone_constraints = c(0,1),
-                               verbose = T,
                                nrounds = 1000,
+                               verbose = F,
                                early_stopping_rounds = 50,
                                watchlist = watchlist)
 
+# Generate predictions
+pred <- predict(xgb_fit, test_mat)
+pred_monotonic <- predict(xgb_fit_monotonic, test_mat)
+
 shap_vals <- predict(xgb_fit, 
                      test_mat,
-                     predcontrib = T) 
+                     predcontrib = T) %>% 
+  as_tibble() %>% 
+  rename(gender_shap = gender,
+         warfarin_shap = warfarin,
+         bias_shap = BIAS) %>% 
+  bind_cols(test) %>% 
+  bind_cols(pred = pred) %>% 
+  mutate(experiment = "Unconstrained Model")
 
-shap_vals_mono <- predict(xgb_fit_monotonic, 
-                          test_mat,
-                          predcontrib = T) 
+shap_vals_monotonic <- predict(xgb_fit_monotonic, 
+                               test_mat,
+                               predcontrib = T) %>% 
+  as_tibble() %>% 
+  rename(gender_shap = gender,
+         warfarin_shap = warfarin,
+         bias_shap = BIAS) %>% 
+  bind_cols(test) %>% 
+  bind_cols(pred = pred_monotonic) %>% 
+  mutate(experiment = "Monotonic")
+
+plot_data <- bind_rows(shap_vals_original,
+                       shap_vals,
+                       shap_vals_monotonic)
 
 ```
 
-```{r plots}
-pred <- predict(xgb_fit_monotonic, test_mat)
 
-ggplot(data = test %>%
-         bind_cols(pred=pred),
+```{r monotonic vs unconstrained model}
+
+ggplot(data = plot_data,
        aes(x = warfarin,
            y = pred)) +
   # geom_point()
-  stat_smooth()
+  stat_smooth() +
+  facet_grid(. ~ experiment) +
+  coord_cartesian(xlim = c(0, 15)) + 
+  labs(x = "Blood Thinner Dosage (Warfarin, mg)",
+       y = "Blood Thinness Index (INR)")
 
 
-
-plot(shap_vals[,2] ~ test$warfarin)
-plot(shap_vals[,1] ~ test$gender)
-
-xgb.plot.shap(data = test %>% 
-                select(-inr) %>% 
-                as.matrix(),
-              shap_contrib = shap_vals, model = xgb_fit, top_n = 4)
 ```
 
-
 # Conclusion
-
 
 In reality, data analysis aims to elucidate the data generating mechanism, and in a world where the data are vast and noise is abundant, the understanding of subject domain and its quirks is crucial for creating a data analysis with utility. 
