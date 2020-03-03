@@ -147,11 +147,14 @@ shap_vals <- predict(xgb_fit,
                      test_mat,
                      predcontrib = T) 
 
+shap_vals_mono <- predict(xgb_fit_monotonic, 
+                          test_mat,
+                          predcontrib = T) 
 
 ```
 
 ```{r plots}
-pred <- predict(xgb_fit, test_mat)
+pred <- predict(xgb_fit_monotonic, test_mat)
 
 ggplot(data = test %>%
          bind_cols(pred=pred),
