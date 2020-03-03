@@ -49,7 +49,7 @@
   <!--/radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-resource-manifest">
-  {"type":"character","attributes":{},"value":["modeling-domain-specific-constraints-with-xgboost_files/bowser-1.9.3/bowser.min.js","modeling-domain-specific-constraints-with-xgboost_files/distill-2.2.21/template.v2.js","modeling-domain-specific-constraints-with-xgboost_files/figure-html5/monotonic vs unconstrained model-1.png","modeling-domain-specific-constraints-with-xgboost_files/figure-html5/plot of original data-1.png","modeling-domain-specific-constraints-with-xgboost_files/figure-html5/plot of original data-2.png","modeling-domain-specific-constraints-with-xgboost_files/figure-html5/unnamed-chunk-2-1.png","modeling-domain-specific-constraints-with-xgboost_files/figure-html5/unnamed-chunk-2-2.png","modeling-domain-specific-constraints-with-xgboost_files/figure-html5/unnamed-chunk-3-1.png","modeling-domain-specific-constraints-with-xgboost_files/figure-html5/unnamed-chunk-3-2.png","modeling-domain-specific-constraints-with-xgboost_files/jquery-1.11.3/jquery.min.js","modeling-domain-specific-constraints-with-xgboost_files/webcomponents-2.0.0/webcomponents.js"]}
+  {"type":"character","attributes":{},"value":["modeling-domain-specific-constraints-with-xgboost_files/figure-html5/monotonic vs unconstrained model-1.png","modeling-domain-specific-constraints-with-xgboost_files/figure-html5/plot of original data-1.png","modeling-domain-specific-constraints-with-xgboost_files/figure-html5/plot of original data-2.png","modeling-domain-specific-constraints-with-xgboost_files/figure-html5/unnamed-chunk-3-1.png","modeling-domain-specific-constraints-with-xgboost_files/figure-html5/unnamed-chunk-3-2.png"]}
   </script>
   <!--radix_placeholder_navigation_in_header-->
   <!--/radix_placeholder_navigation_in_header-->
@@ -992,10 +992,103 @@ Given the rough medical truism that serious diseases are less common than mild d
 
 </div>
 <div class="layout-chunk" data-layout="l-body">
+<pre><code>
+[1] train-rmse:5.266845 eval-rmse:5.259287 
+Multiple eval metrics are present. Will use eval_rmse for early stopping.
+Will train until eval_rmse hasn&#39;t improved in 50 rounds.
 
+[2] train-rmse:5.106280 eval-rmse:5.099031 
+[3] train-rmse:4.932675 eval-rmse:4.926034 
+[4] train-rmse:4.786141 eval-rmse:4.780175 
+[5] train-rmse:4.627950 eval-rmse:4.622722 
+[6] train-rmse:4.477810 eval-rmse:4.473352 
+[7] train-rmse:4.351625 eval-rmse:4.347646 
+[8] train-rmse:4.231550 eval-rmse:4.228586 
+[9] train-rmse:4.117496 eval-rmse:4.115600 
+[10]    train-rmse:3.994752 eval-rmse:3.994004 
+[11]    train-rmse:3.892682 eval-rmse:3.892837 
+[12]    train-rmse:3.796370 eval-rmse:3.797817 
+[13]    train-rmse:3.690254 eval-rmse:3.692832 
+[14]    train-rmse:3.595833 eval-rmse:3.599879 
+[15]    train-rmse:3.503441 eval-rmse:3.508708 
+[16]    train-rmse:3.429347 eval-rmse:3.435841 
+[17]    train-rmse:3.360537 eval-rmse:3.368646 
+[18]    train-rmse:3.285496 eval-rmse:3.295059 
+[19]    train-rmse:3.226594 eval-rmse:3.237847 
+[20]    train-rmse:3.162629 eval-rmse:3.175402 
+[21]    train-rmse:3.112728 eval-rmse:3.127323 
+[22]    train-rmse:3.057353 eval-rmse:3.073498 
+[23]    train-rmse:3.015495 eval-rmse:3.033503 
+[24]    train-rmse:2.975656 eval-rmse:2.995588 
+[25]    train-rmse:2.930425 eval-rmse:2.952038 
+[26]    train-rmse:2.898568 eval-rmse:2.922083 
+[27]    train-rmse:2.871296 eval-rmse:2.896776 
+[28]    train-rmse:2.843129 eval-rmse:2.870201 
+[29]    train-rmse:2.811671 eval-rmse:2.840196 
+[30]    train-rmse:2.793986 eval-rmse:2.824383 
+[31]    train-rmse:2.778653 eval-rmse:2.811004 
+[32]    train-rmse:2.757669 eval-rmse:2.791436 
+[33]    train-rmse:2.748035 eval-rmse:2.783231 
+[34]    train-rmse:2.739719 eval-rmse:2.776761 
+[35]    train-rmse:2.727592 eval-rmse:2.766014 
+[36]    train-rmse:2.724358 eval-rmse:2.764081 
+[37]    train-rmse:2.716155 eval-rmse:2.757543 
+[38]    train-rmse:2.711577 eval-rmse:2.754296 
+[39]    train-rmse:2.713406 eval-rmse:2.757270 
+[40]    train-rmse:2.714917 eval-rmse:2.760432 
+[41]    train-rmse:2.713948 eval-rmse:2.761078 
+[42]    train-rmse:2.719133 eval-rmse:2.767292 
+[43]    train-rmse:2.722477 eval-rmse:2.771734 
+[44]    train-rmse:2.727963 eval-rmse:2.778688 
+[45]    train-rmse:2.733782 eval-rmse:2.785380 
+[46]    train-rmse:2.742391 eval-rmse:2.794854 
+[47]    train-rmse:2.747547 eval-rmse:2.801408 
+[48]    train-rmse:2.756144 eval-rmse:2.810930 
+[49]    train-rmse:2.766310 eval-rmse:2.821831 
+[50]    train-rmse:2.774895 eval-rmse:2.831605 
+[51]    train-rmse:2.782804 eval-rmse:2.840491 
+[52]    train-rmse:2.793309 eval-rmse:2.851749 
+[53]    train-rmse:2.801450 eval-rmse:2.860986 
+[54]    train-rmse:2.812316 eval-rmse:2.872520 
+[55]    train-rmse:2.824250 eval-rmse:2.885022 
+[56]    train-rmse:2.833303 eval-rmse:2.895233 
+[57]    train-rmse:2.845066 eval-rmse:2.907603 
+[58]    train-rmse:2.854833 eval-rmse:2.918298 
+[59]    train-rmse:2.864682 eval-rmse:2.928850 
+[60]    train-rmse:2.875569 eval-rmse:2.940284 
+[61]    train-rmse:2.885387 eval-rmse:2.950764 
+[62]    train-rmse:2.896697 eval-rmse:2.962661 
+[63]    train-rmse:2.906115 eval-rmse:2.972745 
+[64]    train-rmse:2.915537 eval-rmse:2.982789 
+[65]    train-rmse:2.926691 eval-rmse:2.994453 
+[66]    train-rmse:2.936007 eval-rmse:3.004206 
+[67]    train-rmse:2.945211 eval-rmse:3.013878 
+[68]    train-rmse:2.954435 eval-rmse:3.023547 
+[69]    train-rmse:2.964559 eval-rmse:3.034094 
+[70]    train-rmse:2.973453 eval-rmse:3.043493 
+[71]    train-rmse:2.982273 eval-rmse:3.052762 
+[72]    train-rmse:2.992459 eval-rmse:3.063350 
+[73]    train-rmse:3.000958 eval-rmse:3.072343 
+[74]    train-rmse:3.009283 eval-rmse:3.081020 
+[75]    train-rmse:3.018823 eval-rmse:3.090868 
+[76]    train-rmse:3.026890 eval-rmse:3.099370 
+[77]    train-rmse:3.034825 eval-rmse:3.107700 
+[78]    train-rmse:3.043590 eval-rmse:3.116785 
+[79]    train-rmse:3.051169 eval-rmse:3.124790 
+[80]    train-rmse:3.059373 eval-rmse:3.133285 
+[81]    train-rmse:3.066638 eval-rmse:3.140946 
+[82]    train-rmse:3.073809 eval-rmse:3.148500 
+[83]    train-rmse:3.081543 eval-rmse:3.156504 
+[84]    train-rmse:3.088402 eval-rmse:3.163716 
+[85]    train-rmse:3.095122 eval-rmse:3.170772 
+[86]    train-rmse:3.102133 eval-rmse:3.178029 
+[87]    train-rmse:3.108512 eval-rmse:3.184662 
+[88]    train-rmse:3.115277 eval-rmse:3.191662 
+Stopping. Best iteration:
+[38]    train-rmse:2.711577 eval-rmse:2.754296</code></pre>
 </div>
 <div class="layout-chunk" data-layout="l-body">
-<p><img src="modeling-domain-specific-constraints-with-xgboost_files/figure-html5/monotonic%20vs%20unconstrained%20model-1.png" width="624" /></p>
+<p><img src="modeling-domain-specific-constraints-with-xgboost_files/figure-html5/monotonic%20vs%20unconstrained%20model-1.png" width="672" /></p>
 </div>
 <h1 id="conclusion">Conclusion</h1>
 <p>In reality, data analysis aims to elucidate the data generating mechanism, and in a world where the data are vast and noise is abundant, the understanding of subject domain and its quirks is crucial for creating a data analysis with utility.</p>
