@@ -2,17 +2,17 @@
   {
     "path": "posts/2020-03-01-data-analyst-mindset/",
     "title": "The Perils of \"Auto-pilot Data Analysis\"",
-    "description": "Incorporating domain knowledge from subject matter experts is critical for building useful models. As statistician George Box said, *\"All models are wrong, but some are useful.\"* How useful our models are depend on how well we apply domain knowledge to extract the signal from the noise.",
+    "description": "Incorporating domain knowledge from subject matter experts is critical for building useful models. As statistician George Box said, \"All models are wrong, but some are useful.\" How useful our models are depend on how well we apply domain knowledge to extract the signal from the noise.",
     "author": [
       {
         "name": "David Dai",
         "url": "https://www.daviddai.ca/"
       }
     ],
-    "date": "2020-03-03",
+    "date": "2020-03-07",
     "categories": [],
     "preview": {},
-    "last_modified": "2020-03-03T13:36:33-05:00"
+    "last_modified": "2020-03-07T15:03:16-05:00"
   },
   {
     "path": "posts/2020-02-25-optimizing-ed-nurse-assignment/",
