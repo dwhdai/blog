@@ -12,6 +12,9 @@ output:
   distill::distill_article:
     self_contained: false
 draft: false
+categories: 
+  - Modeling
+  - Healthcare
 ---
 
 ```{r setup, include=FALSE}
